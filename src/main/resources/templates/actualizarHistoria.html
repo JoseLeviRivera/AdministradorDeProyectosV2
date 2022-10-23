@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmls:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title>Actualizar Proyecto</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	</head>
+	
+	<body>
+		<div th:replace="barMenu :: menu "></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+					<h1 class="text-center">Editar Historias</h1>
+					<div calss="card-body">
+						<form th:action="@{/historias/{id}(id=${historia.id})}" th:object="${historia}" method="POST">
+							<div class="form-group">
+								<label>Nombre de la Historia </label>
+								<input type="text" name="nombre"  th:field="*{nombre}" class="form-control" required>
+							</div>
+							<div class="form-group">	
+								<label>Descripcion </label>
+								<input type="text" name="descripcion"  th:field="*{descripcion}" class="form-control" required>
+							</div>
+							<div class="form-group">	
+								<label>Peso: </label>
+								<select class="form-control" th:field="*{peso}" required>
+									<option th:value="2">2</option>
+									<option th:value="4">4</option>
+									<option th:value="8">8</option>
+									<option th:value="12">12</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label>Id del Usuario </label>
+								<input type="text" name="idUsuario"  th:field="*{idUsuario}" class="form-control" required>
+							</div>
+							<div class="form-group">	
+								<label>Estado </label>
+								<select class="form-control" th:field="*{estado}">
+									<option th:value="Pendiente">Pendiente</option>
+									<option th:value="Realizandola">Realizandola</option>
+									<option th:value="Terminada">Terminada</option>									
+								</select>
+							</div>
+							<div class="form-group">
+								<label>Seleccionar Proyecto </label>
+								<select class="form-control" th:field="*{proyectoAsociado.id}" required>
+									<option th:each="proyecto: ${proyectos}" th:value="${proyecto.id}" th:text="${proyecto.nombre}" ></option>
+								</select>
+							</div>							
+							<br>
+							<div class="box-footer">
+								<button type="submit" class="btn btn-danger">Actualizar</button>
+							</div>
+							<br>
+						</form>
+					</div>
+				</div>				
+			</div>
+		</div>
+	</body>
+</html>
